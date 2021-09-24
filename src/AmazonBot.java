@@ -3,8 +3,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.TimerTask;
 
-public class AmazonBot {
+public class AmazonBot extends TimerTask {
 
     private final String url;
     private final double targetPrice;
@@ -34,14 +36,11 @@ public class AmazonBot {
         }
     }
 
-    private void priceCheck(Element priceBlock) {
+    private boolean priceCheck(Element priceBlock) {
+        Date now = new Date();
         String textPrice = priceBlock.text().substring(0, priceBlock.text().length() - 3).replaceAll("\\s+", "").replaceAll(",", ".");
         double price = Double.parseDouble(textPrice);
-        System.out.println(price + "PLN");
-        if (price < targetPrice) {
-            System.out.println("Dobra cena!");
-        } else {
-            System.out.println("Mogłoby być lepiej.");
-        }
+        System.out.println(now + "  |  " + price + "PLN");
+        return price < targetPrice;
     }
 }
