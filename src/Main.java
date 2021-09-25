@@ -10,13 +10,8 @@ public class Main {
         final String url = scanner.nextLine();
         System.out.print("Podaj cenę (w ZŁ) > ");
         final double targetPrice = scanner.nextDouble();
-        System.out.print("Co ile minut bot powinien sprawdzać cenę? (dozwolony zakres 10min-120min) > ");
+        System.out.print("Co ile minut bot powinien sprawdzać cenę? > ");
         int minutes = scanner.nextInt();
-        if (minutes < 10 || minutes > 120) {
-            System.out.println("Podany zakres jest niedozwolony. Spróbuj jeszcze raz.");
-            return;
-        }
-
         Timer time = new Timer();
         AmazonBot ab = new AmazonBot(url, targetPrice);
         time.schedule(ab, 0, Utility.convertMinutesToMiliseconds(minutes));

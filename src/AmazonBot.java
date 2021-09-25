@@ -21,7 +21,7 @@ public class AmazonBot extends TimerTask {
         connect();
         Element priceBlock = document.getElementById("priceblock_ourprice");
         if (priceBlock == null) {
-            System.out.println("Nie można znleźć elementu. Sprawdź czy podany przez Ciebie link jest poprawny.");
+            System.out.println("Nie można znaleźć elementu. Sprawdź czy podany przez Ciebie link jest poprawny.");
             return;
         }
         priceCheck(priceBlock);
@@ -36,11 +36,10 @@ public class AmazonBot extends TimerTask {
         }
     }
 
-    private boolean priceCheck(Element priceBlock) {
+    private void priceCheck(Element priceBlock) {
         Date now = new Date();
         String textPrice = priceBlock.text().substring(0, priceBlock.text().length() - 3).replaceAll("\\s+", "").replaceAll(",", ".");
         double price = Double.parseDouble(textPrice);
         System.out.println(now + "  |  " + price + "PLN");
-        return price < targetPrice;
     }
 }
